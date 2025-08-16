@@ -11,6 +11,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { BookFlightComponent } from './book-flight/book-flight.component';
 import { RegisterPassengerComponent } from './register-passenger/register-passenger.component';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -29,9 +30,17 @@ import { MyBookingsComponent } from './my-bookings/my-bookings.component';
     RouterModule.forRoot([
       { path: '', component: SearchFlightsComponent, pathMatch: 'full' },
       { path: 'search-flights', component: SearchFlightsComponent },
-      { path: 'book-flight/:flightId', component: BookFlightComponent },
+      {
+        path: 'book-flight/:flightId',
+        component: BookFlightComponent,
+        canActivate: [AuthGuard],
+      },
       { path: 'register-passenger', component: RegisterPassengerComponent },
-      { path: 'my-booking', component: MyBookingsComponent },
+      {
+        path: 'my-booking',
+        component: MyBookingsComponent,
+        canActivate: [AuthGuard],
+      },
     ]),
   ],
   providers: [provideHttpClient()],
