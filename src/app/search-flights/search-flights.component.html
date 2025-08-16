@@ -1,0 +1,137 @@
+<h5 class="text-md-center m-5"> Search for Flights</h5>
+
+<div class="m-5 d-grid gap-3">
+<div class="row">
+    <div class="col">
+        <div class="form-floating">
+            <input placeholder="From" class="form-control"/>
+            <label class="text-primary form-lable">From</label>
+        </div>
+    </div>
+    <div class="col">
+         <div class="form-floating">
+            <input placeholder="From" class="form-control"/>
+            <label class="text-primary form-lable">Destination</label>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="form-floating">
+            <input type="date" placeholder="From" class="form-control"/>
+            <label class="text-primary form-lable">From Date</label>
+        </div>
+    </div>
+    <div class="col">
+         <div class="form-floating">
+            <input type="date" placeholder="From" class="form-control"/>
+            <label class="text-primary form-lable">To Date</label>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col text-end">
+        <label class="form-lable text-primary mt-2">Number of passengers</label>
+    </div>
+    <div class="col">
+        <div class="input-group">
+            <div class="input-group-text">For</div>
+            <input class="form-control" type="number" placeholder="1"/>
+            <div class="input-group-text">Passengers</div>
+            <button (click)="search()" type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+
+
+<div *ngFor="let airline of searchResult">
+    <div class="card text-dark mt-5 text-center">
+        <div class="card-body" style="padding: 20px; background-color: #e5ecf26e;">
+            <h6 class="card-title">
+                {{airline.airline}}
+            </h6>
+            <div class="card-title" style="color: #ff3939">
+                {{airline.remainingNumberOfSeats}} remaining seats
+            </div>
+            <div class="d-grid text-center g-2">
+        <div class="row">
+          <div class="col">
+
+            <div class="col m-3">
+              <i class="text-primary fas fa-plane-departure" style="font-size:20px;"></i>
+            </div>
+
+            <div class="col">
+              <i class="fa-solid fa-location-dot">
+            </i>
+                {{airline.departure?.place}}
+            </div>
+
+            <div class="col m-2">
+              <i class="fa-regular"></i>
+              {{airline.departure?.time | date }}
+            </div>
+
+            <div class="col">
+              <i class="fa-regular fa-clock"></i>
+              {{airline.departure?.time | date:'shortTime' }}
+            </div>
+
+
+          </div>
+
+          <div class="col">
+            <div style="display:flex;">
+              <i class="fa-solid fa-circle" style="margin-top:50px; font-size:9px;"></i>
+              <hr style="display:block; width: 100%; margin-top:55px;" />
+              <i class="fas fa-plane" style="margin-top:48px;"></i>
+            </div>
+
+            <i class="fas fa-usd">
+            </i>
+                {{airline.price}}
+            <br />
+            <a [routerLink]="['/book-flight',airline.id]" class="btn btn-secondary btn-lg mt-2">
+              <i class="fas fa-ticket"></i>
+              Book
+            </a>
+          </div>
+
+          <div class="col">
+            <div class="col m-3">
+              <i class="text-primary fas fa-plane-arrival" style="font-size:20px;"></i>
+            </div>
+
+            <div class="col">
+              <i class="fa-solid fa-location-dot">
+            </i>
+                {{airline.arrival?.place}}
+            </div>
+
+            <div class="col m-2">
+              <i class="fa-regular"></i>
+              {{airline.arrival?.time | date }}
+            </div>
+
+            <div class="col">
+              <i class="fa-regular fa-clock"></i>
+              {{airline.arrival?.time | date:'shortTime' }}
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+        </div>
+    </div>
+</div>
